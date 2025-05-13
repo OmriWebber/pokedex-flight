@@ -7,9 +7,14 @@ export interface Pokemon {
     url: string
 }
 
+export interface Type2 {
+  name: string
+  url: string
+}
+
 export interface Type {
-    name: string
-    url: string
+  slot: number
+  type: Type2
 }
 
 export interface Stat {
@@ -19,6 +24,17 @@ export interface Stat {
         name: string
         url: string
     }
+}
+
+export interface Ability2 {
+  name: string
+  url: string
+}
+
+export interface Ability {
+  is_hidden: boolean
+  slot: number
+  ability: Ability2
 }
 
 export interface PokemonResponse {

@@ -5,6 +5,9 @@ import fetcher from '@/utils/fetcher'
 import Link from 'next/link'
 import { FC, useMemo } from 'react'
 import useSWRImmutable from 'swr/immutable'
+import { normalizePokemonLite } from '@/utils/normalizePokemon'
+import { Type } from '@/types/Pokemon';
+import PokemonTypeColor from '@/utils/colors';
 
 interface PokemonCardProps {
   url: string
@@ -17,34 +20,61 @@ const PokemonCard: FC<PokemonCardProps> = ({ url, index, ...props }) => {
 
   const pokemon = useMemo(() => {
     if (!data) return null
-    return { pokemon: data }
+    return normalizePokemonLite({ pokemon: data })
   }, [data])
 
   if (error) return null
   if (!pokemon) return null
 
-  const { name, types } = pokemon.pokemon
-  const imageUrl = pokemon.pokemon.sprites.other['official-artwork'].front_default
+  const { name, types, bgColors, image, number } = pokemon
 
+  console.log('PokemonCard', pokemon) 
   return (
     <Link
       href={`pokemon/${name}`}
       prefetch={false}
-      className="hover:shadow-gray-300 flex h-full w-full flex-col items-center justify-between rounded-2xl shadow-lg shadow-secondary/10 transition-all duration-500 ease-in-out will-change-transform hover:-translate-y-3 hover:scale-105"
+      className="
+        hover:shadow-gray-300 
+        flex 
+        h-full 
+        w-full 
+        flex-col 
+        items-center 
+        justify-between 
+        rounded-2xl 
+        shadow-lg 
+        shadow-black/10 
+        border-2 
+        transition-all 
+        duration-300 
+        ease-in-out 
+        will-change-transform 
+        hover:scale-110
+        hover:shadow-lg
+        hover:border-gray-300
+        py-8"
+      style={{
+        background: `linear-gradient(180deg, #fafafa, ${bgColors[0].light})`,
+        borderColor: bgColors[0].light,
+      }}
       {...props}
     >
+      
+
       <div
-        className="relative flex h-2/3 w-full flex-col items-center justify-center overflow-hidden rounded-t-2xl"
-
+        className="
+          relative 
+          flex 
+          h-full 
+          w-full 
+          flex-col 
+          items-center 
+          justify-center 
+          overflow-hidden 
+          rounded-t-2xl"
       >
-        <p
-          className="absolute top-2 left-8 text-4xl font-bold tracking-widest drop-shadow-2xl"
-
-        >
-        </p>
-
         <img
-          src={imageUrl}
+          src={image}
           alt={name}
           height={200}
           width={200}
@@ -60,15 +90,27 @@ const PokemonCard: FC<PokemonCardProps> = ({ url, index, ...props }) => {
           {name}
         </h3>
 
+        <p className="text-sm opacity-70 mb-2" >
+          {`#${number}`} 
+        </p>
         <div className="flex w-full flex-row items-center justify-center gap-4">
-          {types.map((type: any, index: number) => (
-            <div
-              key={index}
-              className={`rounded-full bg-black px-4 py-1 text-center text-sm font-semibold capitalize text-white`}
-            >
-              {type.type.name}
-            </div>
-          ))}
+          {types.map((t: Type, idx: number) => {
+            return (
+              <div
+                key={idx}
+                style={{
+                  backgroundColor: Object.entries(PokemonTypeColor).filter(
+                    ([key]) => key === t.type.name
+                  )[0][1].medium,
+                }}
+                className="rounded-md px-2 py-1"
+              >
+                <p className="text-xs font-semibold tracking-wide text-primary">
+                  {t.type.name.toUpperCase()}
+                </p>
+              </div>
+            )
+          })}
         </div>
       </div>
     </Link>
