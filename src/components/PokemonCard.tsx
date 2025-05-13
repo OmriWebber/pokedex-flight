@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-
-import { Type } from '@/types/Pokemon'
 import fetcher from '@/utils/fetcher'
 import Link from 'next/link'
 import { FC, useMemo } from 'react'
