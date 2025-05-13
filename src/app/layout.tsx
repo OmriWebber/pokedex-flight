@@ -9,8 +9,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/favicon.ico",
   },
-  manifest: "/site.webmanifest",
-  themeColor: "#ffffff",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
