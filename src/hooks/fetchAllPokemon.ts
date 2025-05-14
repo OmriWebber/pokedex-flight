@@ -1,21 +1,51 @@
 import { PokemonResponse } from '@/types/Pokemon';
 
+import fetcher from '@/utils/fetcher'
+import { useCallback } from 'react'
+import useSWRInfinite from 'swr/infinite'
+
+const LIMIT: number = 15
+
 const requestOptions: RequestInit = {
   method: "GET",
   redirect: "follow",
 };
 
-const fetchAllPokemon = async (): Promise<PokemonResponse> => {
-  try {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon", requestOptions);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data: PokemonResponse = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Failed to fetch Pokémon data:", error);
-    throw error;
+const getKey = (pageIndex: any, previousPageData: any) => {
+  // reached the end
+  if (previousPageData && !previousPageData.next) return null
+
+  // first page, we don't have `previousPageData`
+  if (pageIndex === 0)
+    return `https://pokeapi.co/api/v2/pokemon?offset=0&limit=${LIMIT}`
+
+  // add the cursor to the API endpoint
+  return previousPageData.next
+}
+
+const fetchAllPokemon = () => {
+  const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  })
+
+  const pokemons = data ? [].concat(...data) : []
+  const isLoadingInitialData = !data && !error
+  const isLoadingMore =
+    isLoadingInitialData ||
+    (size > 0 && data && typeof data[size - 1] === 'undefined')
+  const isEmpty = data?.[0]?.length === 0
+  const isReachingEnd =
+    isEmpty || (data && data[data.length - 1]?.length < LIMIT)
+
+  const next = useCallback(() => setSize((size) => size + 1), [])
+
+  return {
+    data: pokemons,
+    isLoadingMore,
+    isReachingEnd,
+    next,
   }
 };
 
