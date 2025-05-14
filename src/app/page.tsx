@@ -36,7 +36,7 @@ export default function Home() {
   })
 
   return (
-    <div className="grid grid-cols-3 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-items-center min-h-screen p-4 pb-20 gap-8 md:p-20">
       {pokemons?.map((data: any, index: number) => {
         const isLast = index === pokemons.length - 1
         const { name, url } = data
@@ -45,7 +45,7 @@ export default function Home() {
           <div
             key={name}
             ref={isLast ? observe : null}
-            className="h-80 w-full"
+            className=" w-full"
           >
             <PokemonCard url={url} index={++index} />
           </div>

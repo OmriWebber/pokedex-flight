@@ -69,7 +69,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ url, index, ...props }) => {
           flex-col 
           items-center 
           justify-center 
-          overflow-hidden 
+          overflow-visible 
           rounded-t-2xl"
       >
         <img
