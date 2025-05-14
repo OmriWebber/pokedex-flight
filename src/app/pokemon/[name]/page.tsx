@@ -3,7 +3,6 @@ import fetcher from '@/utils/fetcher';
 import getPokemon from '@/utils/getPokemon';
 import { normalizePokemon } from '@/utils/normalizePokemon';
 import Head from 'next/head';
-import * as React from 'react'
 import capitaliseFirstLetter from '@/utils/capatilise';
 
 interface PokemonPageProps {
