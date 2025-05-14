@@ -14,3 +14,30 @@ export const PokemonIcon = (props: SVGProps<SVGSVGElement>) => (
     </g>
   </svg>
 )
+
+export const ArrowLeft = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M12.707 17.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L9.414 12l3.293 3.293a1 1 0 000 1.414z" />
+    <path d="M4.5 12a1 1 0 011-1h15a1 1 0 110 2h-15a1 1 0 01-1-1z" />
+  </svg>
+)
+
+export const CaretRight = (props: SVGProps<SVGSVGElement>) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    fill="#000000" 
+    width="24px" 
+    height="24px" 
+    viewBox="0 0 256 256" 
+    id="Flat"
+    {...props}
+  >
+    <path 
+      d="M96,212a4,4,0,0,1-2.82861-6.82837L170.34326,128,93.17139,50.82837a4.00009,4.00009,0,0,1,5.65722-5.65674l80,80a4,4,0,0,1,0,5.65674l-80,80A3.98805,3.98805,0,0,1,96,212Z"/>
+  </svg>
+)
