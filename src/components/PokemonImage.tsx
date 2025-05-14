@@ -8,7 +8,7 @@ interface PokemonImageProps {
 const PokemonImage = ({ pokemon }: PokemonImageProps) => {
   return (
     <div
-      className="relative flex h-full max-h-[70vh] min-h-[50vh] w-full flex-col items-center justify-between overflow-hidden rounded-2xl"
+      className="relative flex h-full max-h-[70vh] min-h-[50vh] w-full flex-col items-center justify-between"
       style={{
         background: `radial-gradient(#fafafa,30%, ${pokemon.bgColors[0].medium})`,
       }}
@@ -27,7 +27,7 @@ const PokemonImage = ({ pokemon }: PokemonImageProps) => {
         <h1 className="capitalize">{pokemon.name}</h1>
       </div>
 
-      <div className="relative flex h-2/4 w-2/4 items-center justify-center lg:h-full lg:w-80">
+      <div className="relative flex h-2/4 w-3/4 items-center justify-center lg:h-full lg:w-[400px] overflow-visible z-20">
         {/* The next/image component is not used here because this project is hosted by vercel and they 
       only allow 1000 image optimizations per month on the free tier. */}
         <img

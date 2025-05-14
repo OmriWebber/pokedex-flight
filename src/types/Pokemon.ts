@@ -4,6 +4,7 @@ export interface Pokemon {
     type: Type[]
     Image: string
     url: string
+    baseStats: Stat[]
 }
 
 
@@ -84,6 +85,12 @@ export interface HeldItem {
 export interface Move2 {
   name: string
   url: string
+}
+
+export interface MoveDetails {
+  power: string
+  pp: string
+  accuracy: string
 }
 
 export interface VersionGroup {
@@ -401,5 +408,7 @@ export interface IPokemon {
   types: Type[]
   past_types: PastType[]
 }
+
+
 
 

@@ -2,7 +2,8 @@ import { EvolvesTo } from '@/types/EvolutionChain'
 import getBackgroundColors from '@/utils/getBackgroundColors'
 import { FC } from 'react'
 import { CaretRight } from '@/components/Icons'
-import EvolutionImage from './EvolutionImage'
+import EvolutionImage from '@/components/Evolution/EvolutionImage'
+import { IMAGE_URL } from '@/utils/constants'
 
 interface EvolutionChainProps {
   pokemon: any
@@ -14,6 +15,7 @@ const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
       {pokemon?.evolution?.chain?.species && (
         <EvolutionImage
           species={pokemon.evolution?.chain.species}
+          imageURL={`${IMAGE_URL + pokemon.evolution?.chain.species.url.split('/').slice(-2, -1)[0]}.png`} // TODO
           bgColor={pokemon.bgColors}
         />
       )}
@@ -27,7 +29,7 @@ const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
                 <EvolutionImage
                   key={idx}
                   species={s.species}
-                  imageURL={s.imageURL} // TODO
+                  imageURL={`${IMAGE_URL + s.species.url.split('/').slice(-2, -1)[0]}.png`} // TODO
                   bgColor={pokemon.bgColors}
                 />
               )
@@ -47,7 +49,7 @@ const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
                   <EvolutionImage
                     key={idx}
                     species={s.species}
-                    imageURL={s.imageURL} // TODO
+                    imageURL={`${IMAGE_URL + s.species.url.split('/').slice(-2, -1)[0]}.png`} // TODO
                     bgColor={getBackgroundColors(pokemon.types)}
                   />
                 )

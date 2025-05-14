@@ -1,45 +1,83 @@
 import { FC } from 'react'
 
 interface StateProps {
-  stats: {
-    title: string
-    content: string | string[] | undefined
+  baseStats: {
+    base_stat: string
+    stat: {
+      name: string
+    }
   }[]
 }
 
-const Stats: FC<StateProps> = ({ stats }) => {
-  return (
-    <div className="mt-8 w-full overflow-hidden rounded-lg">
-      <table className="w-full border-collapse overflow-hidden">
-        <thead>
-          <tr>
-            <th
-              colSpan={2}
-              className="w-full bg-secondary px-5 py-1 text-center text-lg font-semibold text-primary lg:py-2 lg:text-xl"
-            >
-              Pokemon Stats
-            </th>
-          </tr>
-        </thead>
+const BaseStats: FC<StateProps> = ({ baseStats }) => {
+  console.log('baseStats', baseStats)
 
-        <tbody>
-          {stats.map((s: any, index: number) => {
-            const { title, content } = s
-            return (
-              <tr key={index} className="border even:bg-primary-600">
-                <td className="border border-secondary/10 p-2 text-left">
-                  {title}
-                </td>
-                <td className="border border-secondary/10 p-2 text-left">
-                  {content}
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
+  const totalBaseStats = baseStats.reduce((acc: number, stat: any) => {
+    return acc + stat.base_stat
+  }, 0)
+
+  const getProgressBarColor = (value: number) => {
+    if (value >= 50) return 'bg-green-500';
+    return 'bg-red-500';
+  };
+
+  const getTotalProgressBarColor = (value: number) => {
+    if (value >= 300) return 'bg-green-500';
+    return 'bg-red-500';
+  }
+
+  
+
+  return (
+    <div className="mt-8 w-full overflow-hidden max-w-[800px] mx-auto">
+      <table className="w-full border-collapse overflow-hidden">
+        {baseStats.map((s: any, index: number) => {
+          const { base_stat, stat } = s
+          
+          return (
+            <tr key={index} className="flex flex-row w-full items-center justify-between gap-1">
+              <td className="w-2/8">
+                <p className="whitespace-nowrap">
+                  {stat.name
+                    .replace('special-attack', 'Sp. Atk') // Replace "special-attack" with "Sp. Atk"
+                    .replace('special-defense', 'Sp. Def') // Replace "special-defense" with "Sp. Def"
+                    .charAt(0)
+                    .toUpperCase() + stat.name
+                    .replace('special-attack', 'Sp. Atk')
+                    .replace('special-defense', 'Sp. Def')
+                    .slice(1)}
+                </p>            
+              </td>
+              <td className="w-1/4 text-center">
+                {base_stat}
+              </td>
+              <td className="w-full h-1.5 bg-gray-200 rounded overflow-hidden">
+                <div
+                  className={`h-full rounded-2xl ${getProgressBarColor(base_stat)}`}
+                  style={{ width: `${(base_stat / 100) * 100}%` }}
+                >  
+                </div>
+              </td>
+            </tr>
+          )
+        })}
+        <tr className="flex flex-row w-full items-center justify-between gap-1">
+          <td className="w-2/8">
+            <p className='whitespace-nowrap'>Total</p>
+          </td>
+          <td className="w-1/4 text-center">
+            {totalBaseStats}
+          </td>
+          <td className="w-full h-1.5 bg-gray-200 rounded overflow-hidden">
+            <div
+              className={`h-full rounded ${getTotalProgressBarColor(totalBaseStats)}`}
+              style={{ width: `${(totalBaseStats / 600) * 100}%` }}
+            ></div>
+          </td>
+        </tr>
       </table>
     </div>
   )
 }
 
-export default Stats
+export default BaseStats

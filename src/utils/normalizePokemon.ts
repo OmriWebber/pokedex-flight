@@ -29,6 +29,9 @@ export const normalizePokemon = ({
       (l: FlavorTextEntry) => l.language.name === 'en'
     )?.flavor_text,
     stats: getStats({ species, pokemon }),
+    baseStats: pokemon.stats,
+    moves: pokemon.moves,
+    abilities: pokemon.abilities,
     evolution: evolution,
   }
 
@@ -48,6 +51,10 @@ export const normalizePokemonLite = ({ pokemon }: NormalizePokemonLite) => {
     number: pokemon.id.toString().padStart(3, '0'),
     image: imageURL,
     bgColors: getBackgroundColors(pokemon.types),
+    baseStats: pokemon.stats,
+    stats: pokemon.stats,
+    moves: pokemon.moves,
+    abilities: pokemon.abilities,
     types: pokemon.types,
   }
 

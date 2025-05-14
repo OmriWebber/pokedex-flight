@@ -16,6 +16,8 @@ export default async function Pokemon({ params }: PokemonPageProps) {
 
   const { pokemonData, pokemonSpeciesData } = await getPokemon({ name });
 
+  console.log('pokemonData', pokemonData);
+
   if (!(pokemonData && pokemonSpeciesData)) {
     // Redirect if data is not found
     return {
@@ -33,6 +35,8 @@ export default async function Pokemon({ params }: PokemonPageProps) {
     species: pokemonSpeciesData,
     evolution,
   });
+
+  console.log('pokemon', pokemon);
 
   // Capitalize the first letter of each word in the name
   const formatedName = pokemon.name
@@ -54,12 +58,4 @@ export default async function Pokemon({ params }: PokemonPageProps) {
   );
 }
 
-export async function generateStaticParams() {
-  const pokemons: any = await fetcher(
-    `https://pokeapi.co/api/v2/pokemon/?limit=15`
-  );
 
-  return pokemons.results.map((pokemon: any) => ({
-    name: pokemon.name,
-  }));
-}
