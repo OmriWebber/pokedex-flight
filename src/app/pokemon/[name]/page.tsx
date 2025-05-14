@@ -3,13 +3,17 @@ import fetcher from '@/utils/fetcher';
 import getPokemon from '@/utils/getPokemon';
 import { normalizePokemon } from '@/utils/normalizePokemon';
 import Head from 'next/head';
+import * as React from 'react'
+import capitaliseFirstLetter from '@/utils/capatilise';
 
 interface PokemonPageProps {
-  params: { name: string };
+  params: { 
+    name: string 
+  };
 }
 
 export default async function Pokemon({ params }: PokemonPageProps) {
-  const { name } = params;
+  const { name } = await params;
 
   const { pokemonData, pokemonSpeciesData } = await getPokemon({ name });
 
@@ -35,7 +39,7 @@ export default async function Pokemon({ params }: PokemonPageProps) {
   const formatedName = pokemon.name
     .toLowerCase()
     .split(' ')
-    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word: string) => capitaliseFirstLetter(word))
     .join(' ');
 
   return (
