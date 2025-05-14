@@ -14,23 +14,23 @@ export default function Home() {
   const { data } = fetchAllPokemon();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortBy, setSortBy] = useState<'name' | 'number'>('number'); // State to track sorting
-  const itemsPerPage = 15; // Number of Pokémon per page
+  const [sortBy, setSortBy] = useState<'name' | 'number'>('number');
+  const itemsPerPage = 15;
 
-  // Flatten all Pokémon data into a single array
+  // Flatten all Pokemon data into a single array
   const pokemons: any = useMemo(
     () => data?.flatMap((page: any) => page?.results) ?? [],
     [data]
   );
 
-  // Filter Pokémon based on the search term
+  // Filter Pokemon based on the search term
   const filteredPokemons = useMemo(() => {
     return pokemons.filter((pokemon: any) =>
       pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [pokemons, searchTerm]);
 
-  // Sort Pokémon based on the selected criteria (name or number)
+  // Sort Pokemon based on the selected criteria (name or number)
   const sortedPokemons = useMemo(() => {
     return [...filteredPokemons].sort((a: any, b: any) => {
       if (sortBy === 'name') {
@@ -75,6 +75,7 @@ export default function Home() {
 
       {/* Pokemon Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-items-center gap-8 pb-8">
+        
         {paginatedPokemons.map((data: any, index: number) => {
           const { name, url } = data;
 
@@ -85,6 +86,12 @@ export default function Home() {
           );
         })}
       </div>
+
+      {paginatedPokemons.length === 0 && (
+        <div className="w-full flex items-center justify-center">
+          <p className="text-xl text-center font-bold text-gray-500">No Pokémon found</p>
+        </div>
+      )}
 
       {/* Pagination Controls */}
       <div className="fixed bottom-0 left-0 w-full p-4 drop-shadow-2xl border-t border-black/10 bg-white flex justify-center items-center gap-4 mt-8">
