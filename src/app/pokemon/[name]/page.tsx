@@ -12,7 +12,7 @@ interface PokemonPageProps {
 }
 
 export default async function Pokemon({ params }: PokemonPageProps) {
-  const { name } = await params;
+  const { name } = params; // Removed 'await'
 
   const { pokemonData, pokemonSpeciesData } = await getPokemon({ name });
 
@@ -50,7 +50,6 @@ export default async function Pokemon({ params }: PokemonPageProps) {
       </Head>
 
       <PokemonDetailsCard pokemon={pokemon} />
-      
     </>
   );
 }
