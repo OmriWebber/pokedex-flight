@@ -1,18 +1,15 @@
 import PokemonDetailsCard from '@/components/PokemonDetailsCard';
-import { IPokemon } from '@/types/Pokemon';
 import fetcher from '@/utils/fetcher';
 import getPokemon from '@/utils/getPokemon';
 import { normalizePokemon } from '@/utils/normalizePokemon';
 import Head from 'next/head';
-import Link from 'next/link';
-import { ArrowLeft } from '@/components/Icons';
 
 interface PokemonPageProps {
   params: { name: string };
 }
 
 export default async function Pokemon({ params }: PokemonPageProps) {
-  const { name } = params; // Removed 'await'
+  const { name } = params;
 
   const { pokemonData, pokemonSpeciesData } = await getPokemon({ name });
 
