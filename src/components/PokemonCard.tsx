@@ -28,7 +28,6 @@ const PokemonCard: FC<PokemonCardProps> = ({ url, index, ...props }) => {
 
   const { name, types, bgColors, image, number } = pokemon
 
-  console.log('PokemonCard', pokemon) 
   return (
     <Link
       href={`pokemon/${name}`}
