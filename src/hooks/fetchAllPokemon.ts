@@ -4,7 +4,7 @@ import fetcher from '@/utils/fetcher'
 import { useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 
-const LIMIT: number = 15
+const LIMIT: number = 151
 
 const requestOptions: RequestInit = {
   method: "GET",
