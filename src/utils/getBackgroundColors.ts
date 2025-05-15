@@ -10,7 +10,7 @@ const getBackgroundColors = (
     );
 
     if (!entry) {
-      console.warn(`No background color found for type: ${name}`);
+      console.warn(`No background color found for type: ${type.name}`);
       return { light: '#FFFFFF', medium: '#CCCCCC' }; // Default colors
     }
 

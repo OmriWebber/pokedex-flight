@@ -1,15 +1,18 @@
 import { FC } from 'react'
 
 interface StateProps {
+  pokemon: any
   about: {
     title: string
     content: string | string[] | undefined
   }[]
 }
 
-const Stats: FC<StateProps> = ({ about }) => {
+const Stats: FC<StateProps> = ({ pokemon ,about }) => {
+  console.log('pokemon', pokemon)
   return (
     <div className="w-full overflow-hidden max-w-[800px] mx-auto">
+      <p className='text-center mb-6 max-w-[400px] mx-auto'>{pokemon.flavorText}</p>
       <table className="w-full border-collapse overflow-hidden">
         <tbody>
           {about.map((s: any, index: number) => {

@@ -20,8 +20,6 @@ export const normalizePokemon = ({
     id: pokemon.id,
     name: pokemon.name,
     number: pokemon.id.toString().padStart(3, '0'),
-    jpName: species.names.find((name: any) => name.language.name === 'ja-Hrkt')
-      .name,
     image: `${imageURL}`,
     bgColors: getBackgroundColors(pokemon.types),
     types: pokemon.types,

@@ -7,7 +7,6 @@ export interface Pokemon {
     baseStats: Stat[]
 }
 
-
 export interface PokemonResponse {
   count: number;
   next: string | null;
@@ -93,7 +92,6 @@ export interface MoveDetails {
     pp: string
     accuracy: string
   }
-  
 }
 
 export interface VersionGroup {

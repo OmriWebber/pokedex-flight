@@ -25,16 +25,16 @@ const getStats = ({ species, pokemon }: any) => {
     },
     {
       title: 'Abilities',
-      content: pokemon?.abilities?.map((abilitie: Ability) => {
-        return capitaliseFirstLetter(abilitie.ability.name) + '\n'
-      }),
+      content: pokemon?.abilities
+        ?.map((ability: Ability) => capitaliseFirstLetter(ability.ability.name))
+        .join(', '),
     },
     {
       title: 'Base Exp',
       content: pokemon?.base_experience.toString(),
     },
     {
-      title: 'Catch Rate:',
+      title: 'Catch Rate',
       content: ((species?.capture_rate / 255) * 100).toFixed(1) + '%',
     },
     {

@@ -26,7 +26,6 @@ const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.ABOUT);
   const { bgColors } = pokemon;
 
-  // Array of tabs for easier navigation
   const tabs = [Tab.ABOUT, Tab.STATS, Tab.EVOLUTIONS, Tab.Moves];
 
   // Handle swipe gestures
@@ -49,8 +48,8 @@ const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
   // Animation variants for tab transitions
   const variants = {
     initial: { opacity: 0, y: 50 }, 
-    animate: { opacity: 1, y: 0 }, // Fade in and slide into view
-    exit: { opacity: 0, y: -50 }, // Slide out to the left
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -50 },
   };
 
   return (
@@ -87,15 +86,15 @@ const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
 
         {/* Tab Content */}
         <motion.div
-          key={activeTab} // Trigger animation when activeTab changes
-          variants={variants} // Apply animation variants
-          initial="initial" // Initial animation state
-          animate="animate" // Animation when entering
-          exit="exit" // Animation when exiting
-          transition={{ duration: 0.3, ease: 'easeInOut' }} // Animation duration
+          key={activeTab}
+          variants={variants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
           className="p-4 md:p-8 w-full text-sm lg:text-base"
         >
-          {activeTab === Tab.ABOUT && <About about={pokemon.stats} />}
+          {activeTab === Tab.ABOUT && <About pokemon={pokemon} about={pokemon.stats} />}
           {activeTab === Tab.STATS && <Stats baseStats={pokemon.baseStats} />}
           {activeTab === Tab.EVOLUTIONS && <EvolutionChain pokemon={pokemon} />}
           {activeTab === Tab.Moves && <Moves moves={pokemon.moves} />}
