@@ -12,32 +12,11 @@ interface StateProps {
     };
     version_group_details: any[];
   }[];
+  moveDetails: Record<string, MoveDetails | null>;
+  loading: boolean;
 }
 
-const Moves: FC<StateProps> = ({ moves }) => {
-  const [moveDetails, setMoveDetails] = useState<Record<string, MoveDetails | null>>({});
-  const [loading, setLoading] = useState(false); 
-
-
-  useEffect(() => {
-    const fetchMoveDetails = async () => {
-      setLoading(true);
-      try {
-        const details: any = {};
-        for (const move of moves) {
-          const data: any = await getMove({ url: move.move.url }); // Use the Move type
-          details[move.move.name] = data;
-        }
-        setMoveDetails(details);
-      } catch (error) {
-        console.error('Error fetching move details:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMoveDetails();
-  }, [moves]);
-
+const Moves: FC<StateProps> = ({ moves, moveDetails, loading }) => {
 
 
   return (

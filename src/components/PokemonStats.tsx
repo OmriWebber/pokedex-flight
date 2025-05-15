@@ -11,6 +11,7 @@ import Moves from './Moves';
 import { useSwipeable } from 'react-swipeable';
 import { motion } from 'framer-motion';
 import getBackgroundColors from '@/utils/getBackgroundColors';
+import getMove from '@/utils/getMove';
 
 interface PokemonStatsProps {
   pokemon: any
@@ -23,8 +24,9 @@ enum Tab {
   Moves = 'moves',
 }
 
-const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
+const PokemonStats = async ({ pokemon }: PokemonStatsProps) => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.ABOUT);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { bgColors } = pokemon;
 
   const tabs = [Tab.ABOUT, Tab.STATS, Tab.EVOLUTIONS, Tab.Moves];
@@ -52,6 +54,21 @@ const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -50 },
   };
+
+  // Fetch move details for all moves
+  const moveDetails = Promise.all(
+    pokemon.moves.map(async (move: any) => {
+      const details = await getMove({ url: move.move.url });
+      return { name: move.move.name, details };
+    })
+  );
+
+  // Normalize move details into an object
+  const moveDetailsMap = (await moveDetails).reduce((acc: any, move: any) => {
+    acc[move.name] = move.details;
+    setIsLoading(false);
+    return acc;
+  }, {});
 
   return (
     <div {...swipeHandlers} className="relative flex h-[60vh] lg:h-[50vh] w-full flex-col items-start justify-start bg-primary bg-white rounded-t-4xl overflow-hidden">
@@ -102,7 +119,7 @@ const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
           {activeTab === Tab.ABOUT && <About pokemon={pokemon} about={pokemon.stats} />}
           {activeTab === Tab.STATS && <Stats baseStats={pokemon.baseStats} />}
           {activeTab === Tab.EVOLUTIONS && <EvolutionChain pokemon={pokemon} />}
-          {activeTab === Tab.Moves && <Moves moves={pokemon.moves} />}
+          {activeTab === Tab.Moves && <Moves moves={pokemon.moves} moveDetails={moveDetailsMap} loading={isLoading} />}
         </motion.div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import fetchAllPokemon from '@/hooks/fetchAllPokemon';
 import PokemonCard from '@/components/PokemonCard';
 import Search from '@/components/Search';
 import Link from 'next/link';
+import { Type } from '@/types/Pokemon';
 
 export interface Result {
   name: string;
@@ -31,7 +32,7 @@ export default function Home() {
 
   // Filter Pokemon based on the search term (by name or number)
   const filteredPokemons = useMemo(() => {
-    return pokemons.filter((pokemon: any) => {
+    return pokemons.filter((pokemon: Result) => {
       const pokemonNumber = pokemon.url.split('/').slice(-2, -1)[0].padStart(3, '0');
       return (
         pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()) || // Match by name
