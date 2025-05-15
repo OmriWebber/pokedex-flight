@@ -26,6 +26,7 @@ const PokemonImage = ({ pokemon }: PokemonImageProps) => {
           scale: 1,
           opacity: 1,
           y: 0,
+          delay: 0.4,
           duration: 0.6,
           ease: 'power3.out',
         }

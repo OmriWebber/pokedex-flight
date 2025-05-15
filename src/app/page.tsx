@@ -16,7 +16,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<'name' | 'number'>('number');
-  const itemsPerPage = 30;
+  const itemsPerPage = 12;
 
   // Reset page on search term change
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function Home() {
   const totalPages = Math.ceil(filteredPokemons.length / itemsPerPage);
 
   return (
-    <div className="min-h-screen p-4 md:p-8 pb-20">
+    <div className="min-h-screen max-w-[1600px] w-full mx-auto p-4 md:p-8 pb-20">
       <div className='my-8'>
         <Link href="/">
           <img src="assets/images/logo.svg" alt="Logo" className="w-1/2 md:w-[400px] h-auto mx-auto" />
