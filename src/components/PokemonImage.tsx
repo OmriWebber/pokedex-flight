@@ -39,7 +39,7 @@ const PokemonImage = ({ pokemon }: PokemonImageProps) => {
       className="relative flex h-full w-full flex-col items-center justify-end"
     >
       <div className="absolute z-30 px-8 top-8 flex flex-col gap-4 items-start justify-start w-full text-left font-bold text-white  drop-shadow-xl text-[8vw] md:text-[5vw] 2xl:text-[100px] !leading-[100%]">
-        <Link href={'/'} className='relative bg-white rounded-full p-1 drop-shadow-2xl'>
+        <Link href={'/'} className='relative bg-white rounded-full p-1 drop-shadow-xl hover:scale-[1.2] hover:drop-shadow-2xl transition-all duration-300 ease'>
           <ArrowLeft className="w-8 h-8 font-light text-primary opacity-80 transition-colors duration-150 hover:text-secondary z-10" />
         </Link>
         <div className='flex flex-row gap-2 items-center'>
@@ -70,10 +70,6 @@ const PokemonImage = ({ pokemon }: PokemonImageProps) => {
         </div>
         
       </div>
-
-
-      
-
 
       <div className="relative flex w-3/4 max-w-[400px] lg:max-w-[100%] items-end justify-end md:w-[400px] lg:w-[600px] overflow-visible z-20 -mb-16">
         <img
