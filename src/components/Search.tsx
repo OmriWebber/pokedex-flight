@@ -10,7 +10,7 @@ const Search: FC<SearchProps> = ({ searchTerm, setSearchTerm }) => {
     <div className="w-full">
       <input
         type="text"
-        placeholder="Search Pokémon..."
+        placeholder="Search Pokemon..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"

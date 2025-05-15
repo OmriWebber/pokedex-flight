@@ -12,7 +12,7 @@ export interface Result {
 }
 
 export default function Home() {
-  const { data } = fetchAllPokemon();
+  const { data, isLoadingMore } = fetchAllPokemon();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<'name' | 'number'>('number');
@@ -64,6 +64,7 @@ export default function Home() {
   const totalPages = Math.ceil(filteredPokemons.length / itemsPerPage);
 
   return (
+    
     <div className="min-h-screen max-w-[1600px] w-full mx-auto p-4 md:p-8 pb-20">
       <div className='my-8'>
         <Link href="/">
@@ -85,24 +86,32 @@ export default function Home() {
       </div>
       
 
-      {/* Pokemon Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 items-center justify-items-center gap-2 md:gap-8 pb-18">
-        
-        {paginatedPokemons.map((data: any, index: number) => {
-          const { name, url } = data;
-
-          return (
-            <div key={name} className="w-full">
-              <PokemonCard url={url} index={index + 1} />
-            </div>
-          );
-        })}
-      </div>
-
-      {paginatedPokemons.length === 0 && (
-        <div className="w-full flex items-center justify-center">
-          <p className="text-xl text-center font-bold text-gray-500">No Pokémon found</p>
+      {/* Loader */}
+      {isLoadingMore ? (
+        <div className="flex items-center justify-center h-64">
+          <div className="border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>
         </div>
+      ) : (
+        <>
+          {/* Pokemon Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 items-center justify-items-center gap-2 md:gap-8 pb-18">
+            {paginatedPokemons.map((data: any, index: number) => {
+              const { name, url } = data;
+
+              return (
+                <div key={name} className="w-full">
+                  <PokemonCard url={url} index={index + 1} />
+                </div>
+              );
+            })}
+          </div>
+
+          {paginatedPokemons.length === 0 && !isLoadingMore && (
+            <div className="w-full flex items-center justify-center">
+              <p className="text-xl text-center font-bold text-gray-500">No Pokemon found</p>
+            </div>
+          )}
+        </>
       )}
 
       {/* Pagination Controls */}
