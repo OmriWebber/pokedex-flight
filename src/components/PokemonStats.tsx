@@ -10,6 +10,7 @@ import About from './About';
 import Moves from './Moves';
 import { useSwipeable } from 'react-swipeable';
 import { motion } from 'framer-motion';
+import getBackgroundColors from '@/utils/getBackgroundColors';
 
 interface PokemonStatsProps {
   pokemon: any
@@ -60,25 +61,29 @@ const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
         <div className="sticky top-0 flex w-full justify-between md:justify-center bg-white font-bold pt-16 text-sm lg:text-lg overflow-x-auto whitespace-nowrap">
           <button
             onClick={() => setActiveTab(Tab.ABOUT)}
-            className={`px-4 py-4 ${activeTab === Tab.ABOUT ? `border-b-2 border-[${bgColors[0].medium}] text-[${bgColors[0].medium}]` : 'text-gray-500'}`}
+            className={`px-4 py-4 ${activeTab === Tab.ABOUT ? `border-b-2` : 'text-gray-500'}`}
+            style={activeTab && { borderColor: bgColors[0].medium }}
           >
             About
           </button>
           <button
             onClick={() => setActiveTab(Tab.STATS)}
-            className={`px-4 py-4 ${activeTab === Tab.STATS ? `border-b-2 border-[${bgColors[0].medium}] text-[${bgColors[0].medium}]` : 'text-gray-500'}`}
+            className={`px-4 py-4 ${activeTab === Tab.STATS ? `border-b-2` : 'text-gray-500'}`}
+            style={activeTab && { borderColor: bgColors[0].medium }}
           >
             Base Stats
           </button>
           <button
             onClick={() => setActiveTab(Tab.EVOLUTIONS)}
-            className={`px-4 py-4 ${activeTab === Tab.EVOLUTIONS ? `border-b-2 border-[${bgColors[0].medium}] text-[${bgColors[0].medium}]` : 'text-gray-500'}`}
+            className={`px-4 py-4 ${activeTab === Tab.EVOLUTIONS ? `border-b-2` : 'text-gray-500'}`}
+            style={activeTab && { borderColor: bgColors[0].medium }}
           >
             Evolutions
           </button>
           <button
             onClick={() => setActiveTab(Tab.Moves)}
-            className={`px-4 py-4 ${activeTab === Tab.Moves ? `border-b-2 border-[${bgColors[0].medium}] text-[${bgColors[0].medium}]` : 'text-gray-500'}`}
+            className={`px-4 py-4 ${activeTab === Tab.Moves ? `border-b-2` : 'text-gray-500'}`}
+            style={activeTab && { borderColor: bgColors[0].medium }}
           >
             Moves
           </button>
