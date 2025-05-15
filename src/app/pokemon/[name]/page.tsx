@@ -20,9 +20,6 @@ export default async function Pokemon({ params }: PokemonPageProps) {
 
   const { pokemonData, pokemonSpeciesData } = await getPokemon({ name });
 
-  console.log('pokemonData', pokemonData);
-  console.log('pokemonSpeciesData', pokemonSpeciesData);
-
   if (!(pokemonData && pokemonSpeciesData)) {
     return {
       redirect: {

@@ -13,7 +13,7 @@ const PokemonDetailsCard = ({ pokemon }: PokemonDetailsCardProps) => {
       </div>
       <div className="flex flex-col w-full items-center justify-center">
         <PokemonImage pokemon={pokemon} />
-        <div className='px-8 flex w-full h-full flex-col items-center justify-center'>
+        <div className='px-4 md:px-8 flex w-full h-full flex-col items-center justify-center'>
           <PokemonStats pokemon={pokemon} />
 
         </div>
