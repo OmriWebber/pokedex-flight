@@ -1,4 +1,4 @@
-# Pokedex
+# ![alt text](https://pokedex-flight.vercel.app/assets/images/logo.svg)
 
 Developed for a technical test for Flight Digital. Built with [Next.js](https://nextjs.org). It allows users to browse Pokémon, view their stats, evolutions, and moves.
 
