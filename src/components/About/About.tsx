@@ -8,7 +8,6 @@ interface StateProps {
 }
 
 const Stats: FC<StateProps> = ({ about }) => {
-  console.log('about', about)
   return (
     <div className="mt-8 w-full overflow-hidden rounded-lg">
       <table className="w-full border-collapse overflow-hidden">

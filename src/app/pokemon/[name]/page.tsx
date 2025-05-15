@@ -6,17 +6,19 @@ import Head from 'next/head';
 import capitaliseFirstLetter from '@/utils/capatilise';
 
 interface PokemonPageProps {
-  params: { 
+  params: Promise<{ 
     name: string 
-  };
+  }>;
 }
 
 export default async function Pokemon({ params }: PokemonPageProps) {
-  const { name } = await params;
+  const {name} = await params;
+
+    if (!name) {
+    throw new Error('Invalid params: "name" is required');
+  }
 
   const { pokemonData, pokemonSpeciesData } = await getPokemon({ name });
-
-  console.log('pokemonData', pokemonData);
 
   if (!(pokemonData && pokemonSpeciesData)) {
     // Redirect if data is not found
@@ -36,8 +38,6 @@ export default async function Pokemon({ params }: PokemonPageProps) {
     evolution,
   });
 
-  console.log('pokemon', pokemon);
-
   // Capitalize the first letter of each word in the name
   const formatedName = pokemon.name
     .toLowerCase()
@@ -56,6 +56,13 @@ export default async function Pokemon({ params }: PokemonPageProps) {
       <PokemonDetailsCard pokemon={pokemon} />
     </>
   );
+}
+
+export async function generateStaticParams() {
+  const pokemons = await fetcher('https://pokeapi.co/api/v2/pokemon?limit=10');
+  return pokemons.results.map((pokemon: any) => ({
+    name: pokemon.name,
+  }));
 }
 
 

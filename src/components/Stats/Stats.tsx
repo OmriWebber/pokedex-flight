@@ -10,7 +10,6 @@ interface StateProps {
 }
 
 const BaseStats: FC<StateProps> = ({ baseStats }) => {
-  console.log('baseStats', baseStats)
 
   const totalBaseStats = baseStats.reduce((acc: number, stat: any) => {
     return acc + stat.base_stat

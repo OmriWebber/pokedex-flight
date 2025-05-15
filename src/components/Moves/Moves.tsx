@@ -34,7 +34,6 @@ const Moves: FC<StateProps> = ({ moves }) => {
         setLoading(false);
       }
     };
-    console.log('moves', moveDetails);
     fetchMoveDetails();
   }, [moves]);
 

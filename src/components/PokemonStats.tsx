@@ -23,8 +23,6 @@ enum Tab {
 const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.ABOUT);
 
-  console.log('PokemonStats', pokemon);
-
   return (
     <div className="relative overscroll-visible flex h-full w-full flex-col items-start justify-start bg-primary lg:max-h-[70vh] lg:overflow-y-auto bg-white rounded-t-4xl overflow-hidden -mt-16">
       <div className="w-full">
