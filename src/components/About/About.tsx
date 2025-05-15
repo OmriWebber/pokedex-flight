@@ -9,7 +9,6 @@ interface StateProps {
 }
 
 const Stats: FC<StateProps> = ({ pokemon ,about }) => {
-  console.log('pokemon', pokemon)
   return (
     <div className="w-full overflow-hidden max-w-[800px] mx-auto">
       <p className='text-center mb-6 max-w-[400px] mx-auto'>{pokemon.flavorText}</p>
