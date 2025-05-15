@@ -88,9 +88,12 @@ export interface Move2 {
 }
 
 export interface MoveDetails {
-  power: string
-  pp: string
-  accuracy: string
+  moveData: {
+    power: string
+    pp: string
+    accuracy: string
+  }
+  
 }
 
 export interface VersionGroup {

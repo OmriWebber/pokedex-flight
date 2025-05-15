@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Open_Sans } from "next/font/google"; // Import Open Sans font
+
+// Configure the Open Sans font
+const openSans = Open_Sans({
+  subsets: ["latin"], // Specify the subset
+  weight: ["400", "600", "700"], // Specify the font weights you need
+  display: "swap", // Use "swap" for better performance
+});
 
 export const metadata: Metadata = {
   title: "PokeDex - Flight",
@@ -49,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased bg-white`}
+        className={`antialiased bg-white ${openSans.className} tracking-[-0.02em]`}
       >
         {children}
       </body>

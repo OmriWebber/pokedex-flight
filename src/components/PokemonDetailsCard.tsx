@@ -7,10 +7,16 @@ interface PokemonDetailsCardProps {
 
 const PokemonDetailsCard = ({ pokemon }: PokemonDetailsCardProps) => {
   return (
-    <div className="flex h-full w-full items-center justify-center">
+    <div className="flex w-full h-screen items-stretch">
+      <div className='fixed inset-0' style={{ background: `radial-gradient(#fafafa,30%, ${pokemon.bgColors[0].medium})`}}>
+
+      </div>
       <div className="flex flex-col w-full items-center justify-center">
         <PokemonImage pokemon={pokemon} />
-        <PokemonStats pokemon={pokemon} />
+        <div className='px-8 flex w-full h-full flex-col items-center justify-center'>
+          <PokemonStats pokemon={pokemon} />
+
+        </div>
       </div>
     </div>
   )

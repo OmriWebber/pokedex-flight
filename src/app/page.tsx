@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import fetchAllPokemon from '@/hooks/fetchAllPokemon';
 import PokemonCard from '@/components/PokemonCard';
 import Search from '@/components/Search';
+import Link from 'next/link';
 
 export interface Result {
   name: string;
@@ -16,6 +17,11 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<'name' | 'number'>('number');
   const itemsPerPage = 15;
+
+  // Reset page on search term change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
   // Flatten all Pokemon data into a single array
   const pokemons: any = useMemo(
@@ -34,9 +40,9 @@ export default function Home() {
   const sortedPokemons = useMemo(() => {
     return [...filteredPokemons].sort((a: any, b: any) => {
       if (sortBy === 'name') {
-        return a.name.localeCompare(b.name); // Sort alphabetically by name
+        return a.name.localeCompare(b.name);
       } else {
-        const aNumber = parseInt(a.url.split('/').slice(-2, -1)[0]); // Extract number from URL
+        const aNumber = parseInt(a.url.split('/').slice(-2, -1)[0]);
         const bNumber = parseInt(b.url.split('/').slice(-2, -1)[0]);
         return aNumber - bNumber; // Sort numerically by number
       }
@@ -54,9 +60,11 @@ export default function Home() {
   const totalPages = Math.ceil(filteredPokemons.length / itemsPerPage);
 
   return (
-    <div className="min-h-screen p-8 pb-20">
-      <div className='mb-8'>
-        <h1 className='text-center w-full text-6xl'>PokeDex</h1>
+    <div className="min-h-screen p-4 md:p-8 pb-20">
+      <div className='my-8'>
+        <Link href="/">
+          <h1 className='text-center w-full text-6xl'>PokeDex</h1>
+        </Link>
 
       </div>
       <div className="flex flex-col md:flex-row items-center justify-end w-full gap-4 mb-8">
@@ -74,7 +82,7 @@ export default function Home() {
       
 
       {/* Pokemon Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center justify-items-center gap-8 pb-8">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 items-center justify-items-center gap-2 md:gap-8 pb-18">
         
         {paginatedPokemons.map((data: any, index: number) => {
           const { name, url } = data;

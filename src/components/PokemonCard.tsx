@@ -79,7 +79,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ url, index, ...props }) => {
           width={200}
           loading={index === 1 ? 'eager' : 'lazy'}
           decoding="async"
-          className="drop-shadow xl:h-36 xl:w-36 2xl:h-44 2xl:w-44"
+          className="drop-shadow h-auto w-2/4 xl:h-36 xl:w-36 2xl:h-44 2xl:w-44"
           style={{ contentVisibility: 'auto' }}>
         </img>
       </div>

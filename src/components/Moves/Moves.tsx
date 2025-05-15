@@ -15,8 +15,9 @@ interface StateProps {
 }
 
 const Moves: FC<StateProps> = ({ moves }) => {
-  const [moveDetails, setMoveDetails] = useState<Record<string, MoveDetails | null>>({}); // Store move details by name
-  const [loading, setLoading] = useState(false); // Track loading state
+  const [moveDetails, setMoveDetails] = useState<Record<string, MoveDetails | null>>({});
+  const [loading, setLoading] = useState(false); 
+
 
   useEffect(() => {
     const fetchMoveDetails = async () => {
@@ -40,14 +41,14 @@ const Moves: FC<StateProps> = ({ moves }) => {
 
 
   return (
-    <div className="mt-8 w-full overflow-hidden max-w-[800px] mx-auto">
+    <div className="w-full overflow-hidden max-w-[800px] mx-auto">
       <table className="w-full border-collapse overflow-hidden">
         <thead>
           <tr>
             <th className="text-left">Move Name</th>
-            <th className="text-left">Power</th>
-            <th className="text-left">PP</th>
-            <th className="text-left">Accuracy</th>
+            <th className="text-center">Power</th>
+            <th className="text-center">PP</th>
+            <th className="text-center">Accuracy</th>
           </tr>
         </thead>
         <tbody>
@@ -62,13 +63,12 @@ const Moves: FC<StateProps> = ({ moves }) => {
             moves.map((move: any, index: number) => {
               const { name } = move.move;
               const details = moveDetails[name]; // Access move details by name
-
               return (
                 <tr key={index}>
                   <td className="py-2">{name.charAt(0).toUpperCase() + name.slice(1)}</td>
-                  <td>{details?.power || 'N/A'}</td>
-                  <td>{details?.pp || 'N/A'}</td>
-                  <td>{details?.accuracy || 'N/A'}</td>
+                  <td className='text-center'>{details?.moveData.power || 'N/A'}</td>
+                  <td className='text-center'>{details?.moveData.pp || 'N/A'}</td>
+                  <td className='text-center'>{details?.moveData.accuracy || 'N/A'}</td>
                 </tr>
               );
             })}
