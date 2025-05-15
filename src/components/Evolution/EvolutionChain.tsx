@@ -10,6 +10,7 @@ interface EvolutionChainProps {
 }
 
 const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
+  console.log('EvolutionChain', pokemon.evolution?.chain)
   return (
     <>
       <div className="my-4 flex flex-wrap justify-center overflow-visible">
@@ -23,7 +24,10 @@ const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
 
         {pokemon.evolution?.chain.evolves_to.length !== 0 && (
           <>
-            <CaretRight className="mb-8 mr-3 self-center text-lg text-secondary xl:mr-6 " />
+            <div className='flex flex-col items-center justify-center mr-2 xl:mr-8 pb-8'>
+              <p className='text-center font-bold text-sm'>LVL {pokemon.evolution?.chain.evolves_to[0].evolution_details[0].min_level}</p>
+              <CaretRight className="self-center text-lg text-secondary" />
+            </div>
             {pokemon.evolution?.chain.evolves_to.map(
               (s: EvolvesTo, idx: number) => {
                 return (
@@ -57,7 +61,10 @@ const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
                   )
                 }
               )}
-              <CaretRight className="mb-8 mr-3 self-center text-lg text-secondary  xl:mr-6 " />
+              <div className='flex flex-col items-center justify-center mr-2 xl:mr-8 pb-8'>
+                <p className='text-center font-bold text-sm'>LVL {pokemon.evolution?.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level}</p>
+                <CaretRight className="self-center text-lg text-secondary" />
+              </div>
               {pokemon.evolution?.chain.evolves_to[0].evolves_to.map(
                 (s: EvolvesTo, idx: number) => {
                   return (
