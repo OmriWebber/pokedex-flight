@@ -16,7 +16,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<'name' | 'number'>('number');
-  const itemsPerPage = 15;
+  const itemsPerPage = 30;
 
   // Reset page on search term change
   useEffect(() => {
@@ -29,11 +29,15 @@ export default function Home() {
     [data]
   );
 
-  // Filter Pokemon based on the search term
+  // Filter Pokemon based on the search term (by name or number)
   const filteredPokemons = useMemo(() => {
-    return pokemons.filter((pokemon: any) =>
-      pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    return pokemons.filter((pokemon: any) => {
+      const pokemonNumber = pokemon.url.split('/').slice(-2, -1)[0].padStart(3, '0');
+      return (
+        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()) || // Match by name
+        pokemonNumber.includes(searchTerm) // Match by number
+      );
+    });
   }, [pokemons, searchTerm]);
 
   // Sort Pokemon based on the selected criteria (name or number)
@@ -63,7 +67,7 @@ export default function Home() {
     <div className="min-h-screen p-4 md:p-8 pb-20">
       <div className='my-8'>
         <Link href="/">
-          <h1 className='text-center w-full text-6xl'>PokeDex</h1>
+          <img src="assets/images/logo.svg" alt="Logo" className="w-1/2 md:w-[400px] h-auto mx-auto" />
         </Link>
 
       </div>
@@ -74,7 +78,7 @@ export default function Home() {
         {/* Sort Button */}
         <button
           onClick={() => setSortBy((prev) => (prev === 'name' ? 'number' : 'name'))}
-          className="whitespace-nowrap h-full px-4 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition"
+          className="whitespace-nowrap h-full px-4 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition cursor-pointer"
         >
           Sort by {sortBy === 'name' ? 'Number' : 'Name'}
         </button>
