@@ -13,14 +13,15 @@ const PokemonImage = ({ pokemon }: PokemonImageProps) => {
       className="relative flex h-full w-full flex-col items-center justify-between"
     >
       <div className="flex w-full flex-row items-center justify-between p-3 pr-5">
-        <Link href={'/'} className='relative bg-white rounded-full p-1 drop-shadow-2xl'>
-          <ArrowLeft className="w-8 h-8 font-light text-primary opacity-80 transition-colors duration-150 hover:text-secondary z-10" />
-        </Link>
+        
 
         
       </div>
 
-      <div className="absolute z-30 px-8 top-24 flex flex-col gap-4 items-start justify-start w-full text-left text-4xl font-bold text-white  drop-shadow-xl lg:top-24 lg:text-7xl">
+      <div className="absolute z-30 px-8 top-8 flex flex-col gap-4 items-start justify-start w-full text-left font-bold text-white  drop-shadow-xl text-[8vw] md:text-[5vw] 2xl:text-[100px] !leading-[100%]">
+        <Link href={'/'} className='relative bg-white rounded-full p-1 drop-shadow-2xl'>
+          <ArrowLeft className="w-8 h-8 font-light text-primary opacity-80 transition-colors duration-150 hover:text-secondary z-10" />
+        </Link>
         <div className='flex flex-row gap-2 items-center'>
           <h1 className="capitalize text-left">{pokemon.name}</h1>
           <p className="text-xl font-bold text-primary/70 drop-shadow-2xl opacity-70">
@@ -54,7 +55,7 @@ const PokemonImage = ({ pokemon }: PokemonImageProps) => {
       
 
 
-      <div className="relative flex  w-3/4 items-end justify-end lg:w-[400px] overflow-visible z-20 -mb-16">
+      <div className="relative flex w-3/4 max-w-[400px] lg:max-w-[100%] items-end justify-end md:w-[400px] lg:w-[600px] overflow-visible z-20 -mb-16">
         <img
           key={pokemon.id}
           src={pokemon.image}

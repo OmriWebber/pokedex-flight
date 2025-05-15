@@ -24,11 +24,11 @@ const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.ABOUT);
 
   return (
-    <div className="relative flex h-[60vh] lg:h-[50vh] w-full flex-col items-start justify-start bg-primary overflow-hidden bg-white rounded-t-4xl overflow-hidden">
+    <div className="relative flex h-[60vh] lg:h-[50vh] w-full flex-col items-start justify-start bg-primary bg-white rounded-t-4xl overflow-hidden">
       <div className="w-full overflow-y-auto">
 
         {/* Tabs */}
-        <div className="sticky top-0 flex w-full justify-between md:justify-center bg-white font-bold pt-16 text-sm lg:text-lg">
+        <div className="sticky top-0 flex w-full justify-between md:justify-center bg-white font-bold pt-16 text-sm lg:text-lg overflow-x-auto whitespace-nowrap">
           <button
             onClick={() => setActiveTab(Tab.ABOUT)}
             className={`px-4 py-4 ${activeTab === Tab.ABOUT ? `border-b-2 ${pokemon.bgColors[0].medium}` : 'text-gray-500'}`}
