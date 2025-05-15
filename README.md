@@ -14,8 +14,8 @@ Developed for a technical test for Flight Digital. Built with [Next.js](https://
 
 - **Framework**: [Next.js](https://nextjs.org)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Data Fetching**: SWR with `useSWRInfinite`
-- **Animations**: GSAP and Framer Motion
+- **Data Fetching**: [SWR](https://swr.vercel.app/) with `useSWRInfinite`
+- **Animations**: [GSAP](https://gsap.com/) and [Framer Motion](https://motion.dev/)
 - **Swipe Gestures**: [react-swipeable](https://www.npmjs.com/package/react-swipeable)
 - **API**: [PokeAPI](https://pokeapi.co)
 
