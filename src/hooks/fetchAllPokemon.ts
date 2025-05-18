@@ -12,14 +12,11 @@ const requestOptions: RequestInit = {
 };
 
 const getKey = (pageIndex: any, previousPageData: any) => {
-  // reached the end
   if (previousPageData && !previousPageData.next) return null
 
-  // first page, we don't have `previousPageData`
   if (pageIndex === 0)
     return `https://pokeapi.co/api/v2/pokemon?offset=0&limit=${LIMIT}`
 
-  // add the cursor to the API endpoint
   return previousPageData.next
 }
 

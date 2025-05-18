@@ -1,11 +1,10 @@
 /* eslint-disable react/jsx-key */
 'use client';
-
 import { Type } from '@/types/Pokemon'
 import PokemonTypeColor from '@/utils/colors'
 import EvolutionChain from '@/components/Evolution/EvolutionChain'
 import Stats from '@/components/Stats'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import About from './About';
 import Moves from './Moves';
 import { useSwipeable } from 'react-swipeable';
@@ -24,9 +23,10 @@ enum Tab {
   Moves = 'moves',
 }
 
-const PokemonStats = async ({ pokemon }: PokemonStatsProps) => {
+const PokemonStats = ({ pokemon }: PokemonStatsProps) => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.ABOUT);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [moveDetailsMap, setMoveDetailsMap] = useState<Record<string, any>>({});
   const { bgColors } = pokemon;
 
   const tabs = [Tab.ABOUT, Tab.STATS, Tab.EVOLUTIONS, Tab.Moves];
@@ -55,20 +55,27 @@ const PokemonStats = async ({ pokemon }: PokemonStatsProps) => {
     exit: { opacity: 0, y: -50 },
   };
 
-  // Fetch move details for all moves
-  const moveDetails = Promise.all(
-    pokemon.moves.map(async (move: any) => {
-      const details = await getMove({ url: move.move.url });
-      return { name: move.move.name, details };
-    })
-  );
-
-  // Normalize move details into an object
-  const moveDetailsMap = (await moveDetails).reduce((acc: any, move: any) => {
-    acc[move.name] = move.details;
-    setIsLoading(false);
-    return acc;
-  }, {});
+  // Fetch move details for all moves on mount
+  useEffect(() => {
+    let isMounted = true;
+    setIsLoading(true);
+    Promise.all(
+      pokemon.moves.map(async (move: any) => {
+        const details = await getMove({ url: move.move.url });
+        return { name: move.move.name, details };
+      })
+    ).then((moveDetails) => {
+      if (isMounted) {
+        const map = moveDetails.reduce((acc: any, move: any) => {
+          acc[move.name] = move.details;
+          return acc;
+        }, {});
+        setMoveDetailsMap(map);
+        setIsLoading(false);
+      }
+    });
+    return () => { isMounted = false; };
+  }, [pokemon.moves]);
 
   return (
     <div {...swipeHandlers} className="relative flex h-[60vh] lg:h-[50vh] w-full flex-col items-start justify-start bg-primary bg-white rounded-t-4xl overflow-hidden">
