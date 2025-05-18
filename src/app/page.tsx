@@ -69,7 +69,7 @@ export default function Home() {
     <div className="min-h-screen max-w-[1600px] w-full mx-auto p-4 md:p-8 pb-20">
       <div className='my-8'>
         <Link href="/">
-          <img src="assets/images/logo.svg" alt="Logo" className="w-1/2 md:w-[400px] h-auto mx-auto" />
+          <img src="/assets/images/logo.svg" alt="Logo" className="w-1/2 md:w-[400px] h-auto mx-auto" />
         </Link>
 
       </div>
