@@ -41,8 +41,6 @@ const fetchAllPokemon = () => {
   return {
     data: pokemons,
     isLoadingMore,
-    isReachingEnd,
-    next,
   }
 };
 
