@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: "A simple PokeDex app built with Next.js and TypeScript",
     images: [
       {
-        url: "https://pokeapi.co/static/pokeapi_256.3b2e1d4.png",
+        url: "/assets/images/OG_Image.png",
         alt: "PokeDex - Flight",
       },
     ],
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "PokeDex - Flight",
     images: [
       {
-        url: "https://pokeapi.co/static/pokeapi_256.3b2e1d4.png",
+        url: "/assets/images/OG_Image.png",
         alt: "PokeDex - Flight",
         width: 1200,
         height: 630,
