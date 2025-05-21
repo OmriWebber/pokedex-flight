@@ -1,4 +1,4 @@
-import { EvolvesTo } from '@/types/EvolutionChain'
+import { EvolutionDetail, EvolutionDetail2, EvolvesTo } from '@/types/EvolutionChain'
 import getBackgroundColors from '@/utils/getBackgroundColors'
 import { FC } from 'react'
 import { CaretRight } from '@/components/Icons'
@@ -11,7 +11,6 @@ interface EvolutionChainProps {
 }
 
 const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
-  console.log('EvolutionChain', pokemon)
   function formatName(name: string) {
     return name
       .split('-')
@@ -20,7 +19,6 @@ const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
   }
 
   function getEvolveType(
-    type: string,
     minLevel: number | null,
     minHappiness: number | null,
     item: string | null
@@ -36,7 +34,6 @@ const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
     }
   }
 
-
   return (
     <>
       <div className="my-4 flex flex-wrap justify-center overflow-visible">
@@ -51,14 +48,25 @@ const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
         {pokemon.evolution?.chain.evolves_to.length !== 0 && (
           <>
             <div className='flex flex-col items-center justify-center mr-3 xl:mr-8 pb-8'>
-              <p className='text-center font-bold text-sm'> 
-                {getEvolveType(
-                  pokemon.evolution?.chain.evolves_to[0].evolution_details[0].trigger.name,
-                  pokemon.evolution?.chain.evolves_to[0].evolution_details[0].min_level,
-                  pokemon.evolution?.chain.evolves_to[0].evolution_details[0].min_happiness,
-                  pokemon.evolution?.chain.evolves_to[0].evolution_details[0].item?.name
-                )}
-              </p>
+              {pokemon.evolution?.chain.evolves_to[0].evolution_details.map((s: EvolutionDetail2, index: number) => {
+                return (
+                  <>
+                    <p key={index} className='text-center font-bold text-sm'> 
+                      {getEvolveType(
+                        s.min_level,
+                        s.min_happiness,
+                        s.item?.name
+                      )}
+                    </p>
+                    { s.item?.name && index === 0 && (
+                        <p className='text-center text-sm'>
+                          or
+                        </p>
+                    )}
+                    
+                  </>
+                )
+              })}
               <CaretRight className="self-center text-lg text-secondary" />
             </div>
             {pokemon.evolution?.chain.evolves_to.map(
@@ -97,7 +105,6 @@ const EvolutionChain: FC<EvolutionChainProps> = ({ pokemon }) => {
               <div className='flex flex-col items-center justify-center mr-3 xl:mr-8 pb-8'>
                 <p className='text-center font-bold text-sm'>
                   {getEvolveType(
-                    pokemon.evolution?.chain.evolves_to[0].evolves_to[0].evolution_details[0].trigger.name,
                     pokemon.evolution?.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level,
                     pokemon.evolution?.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_happiness,
                     pokemon.evolution?.chain.evolves_to[0].evolves_to[0].evolution_details[0].item?.name
